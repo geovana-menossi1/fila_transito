@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .vermelho {
+            color: #DF4A4A;
+        }
+        
+        .verde {
+            color: #919E5E;
+        }
+    </style>
+    <title>Semáforo</title>
+</head>
+<body>
+    <div class="botoes">
+        
+    <button onclick="dispararConfete()">Disparar Confete</button>
+    <button onclick="tocarSom()">Tocar Som</button>
+    </div>
+    <div id="image">
+        
+    </div>
+    <audio id="audio" src="som/cardinal-37075.mp3"></audio>
+    <script>
+        const som = document.getElementById('audio');
+        
+        function carregarImagem() {
+        const container = document.getElementById('image');
+        container.innerHTML = '';
+
+    fetch('https://niloweb.com.br/transit-room/api/reg_endpoint.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0 && data[0].res && data[0].dia) {
+                const imagem = document.createElement('img');
+                const titulo = document.createElement('h2');
+                const condition = data[0].res;
+                switch(condition) {
+                    case 'A':
+                        titulo.textContent = "AGUARDANDO LIBERAÇÃO E SEM NINGUÉM FORA DE SALA";
+                        imagem.src = "images/arvore_outono2.png";
+                        dispararConfete('yellow'); 
+                        break;
+                    case 'B':
+                        titulo.textContent = "BLOQUEADO, TRANSITO COM ALGUÉM FORA DA SALA OU LIBERADO PARA SAIR";
+                        titulo.classList.add('vermelho');
+                        imagem.src = "images/arvore_inverno.png";
+                        dispararConfete('red'); 
+                        break;
+                    case 'L':
+                        titulo.textContent = "LIBERADO, TRANSITO LIVRE E SEM NINGUÉM FORA DE SALA";
+                        titulo.classList.add('verde');
+                        imagem.src = "images/arvore.png";
+                        dispararConfete('green'); 
+                        break;
+                    default:
+                        console.error('Condição desconhecida:', condition);
+                }
+                container.appendChild(titulo);
+                container.appendChild(imagem);
+            } else {
+                console.error('Erro ao carregar imagem da API.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao conectar à API:', error);
+        });
+
+        
+    setTimeout(carregarImagem, 60000); 
+
+        }
+        window.onload = carregarImagem;
+        som.play();
+        function dispararConfete(cor) {
+            const defaults = {
+                spread: 360,
+                ticks: 50,
+                gravity: 0,
+                decay: 0.94,
+                startVelocity: 30,
+                shapes: ["star"],
+                colors: {
+                    yellow: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#FDFFB8"],
+                    red: ["#FF0000", "#CC0000", "#FF6666", "#FF3333", "#FF9999"],
+                    green: ["#00FF00", "#00CC00", "#66FF66", "#33FF33", "#99FF99"]
+                }
+            };
+
+            function shoot() {
+                confetti({
+                    ...defaults,
+                    particleCount: 40,
+                    scalar: 1.2,
+                    shapes: ["star"],
+                    colors: defaults.colors[cor], 
+                });
+            }
+            
+            shoot();
+
+            window.dispararConfete = function() {
+                shoot();
+            }
+        }
+            function tocarSom() {
+            som.play();
+        }
+        window.som = function(){
+            som.play();
+        }
+        som.play();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+</body>
+</html>

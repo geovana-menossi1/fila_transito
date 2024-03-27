@@ -1,0 +1,120 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #3c3c3c;
+    z-index: 200;
+    max-width: 95vw;
+    max-height: 95vh;
+}
+#image{
+    width: 99vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3c3c3c;
+    z-index: 200;
+    flex-direction: column;
+}
+img{
+    height: 450px;
+    width: 850px;
+    border-radius: 20px;
+    border: 3px solid #836d47;
+    z-index: 200;
+}
+h2{
+    margin: 10px;
+    color: #d2c848;
+}
+.vermelho{
+    margin: 10px;
+    color: #c61818;
+}
+.verde{
+    margin: 10px;
+    color: #919E5E;
+}
+button{
+    width: 200px;
+    height: 30px;
+    border: 1px solid #adaca2;
+    border-radius: 5px;
+    background-color: #adaca2;
+    font-weight: bold;
+    margin: 10px;
+}
+.botoes{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    height: 100px;
+    position: relative;
+    top: 65px;
+    left: 510px;
+}
+
+@media only screen and (max-width: 600px) {
+    *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #3c3c3c;
+        z-index: 200;
+        max-width: 95vw;
+        max-height: 95vh;
+    }
+    #image{
+        width: 99vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #3c3c3c;
+        z-index: 200;
+        flex-direction: column;
+    }
+    img{
+        height: 250px;
+        width: 400px;
+        border-radius: 20px;
+        border: 3px solid #836d47;
+        z-index: 200;
+        position: relative;
+        left: 10px;
+    }
+    h2{
+        margin: 10px;
+        font-size: 20px;
+        color: #d2c848;
+    }
+    .vermelho{
+        margin: 10px;
+        color: #c61818;
+    }
+    .verde{
+        margin: 10px;
+        color: #919E5E;
+    }
+    button{
+        width: 200px;
+        height: 30px;
+        border: 1px solid #adaca2;
+        border-radius: 5px;
+        background-color: #adaca2;
+        font-weight: bold;
+        margin: 10px;
+    }
+    .botoes{
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        height: 100px;
+        position: relative;
+        top: 95px;
+        left: 50px;
+    }
+  }
